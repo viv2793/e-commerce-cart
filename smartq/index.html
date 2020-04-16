@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="app.js"></script>
+	<title>SmartQ Cafe</title>
+	<style>
+	.navbar {
+	background-color:#ffcc33;
+	}
+	.nav-item a{
+	color:#000000;
+	}
+	.navbar-brand
+	{font-size: 1rem;
+	color:#000000;
+	margin-left:15%;
+	}
+	.right-navbar
+	{
+	margin-right:15%;
+	}
+	.navbar-toggler
+	{
+	border:1px solid #ffffff;
+	}
+	body{
+	background-color:#f5f5f5;
+	}
+	.jumbotron
+	{margin-top:10%;
+	background-color:#ffffff;
+	}
+	.list-group-item.active
+	{background-color:#ffcc33;
+	    border-color: #ffcc33;}
+		.card-header
+		{background-color:#ffcc33;
+		color:#ffffff;
+		
+		}
+		.card-body button {
+		background-color:#ffcc33;
+		color:#ffffff;
+		
+		}
+	</style>
+	
+	
+  </head>
+  <body ng-app="myApp" ng-controller="smartqCtrl">
+ <nav class="navbar navbar-expand-md  fixed-top ">
+      <a class="navbar-brand" href="#">SMART<span style="color:#ffffff;">Q</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+         <ul class="navbar-nav ml-auto right-navbar">
+    <li class="nav-item">
+      <a class="nav-link"><i class="fa fa-user" aria-hidden="true"></i></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">example@example.com</a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">My Profile</a>
+        <a class="dropdown-item" href="#">My Orders</a>
+      </div>
+    </li>
+  </ul>
+      </div>
+    </nav>
+	
+	 <main role="main" class="container">
+      <div class="jumbotron">
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col col-lg-8 col-sm-12">
+ <div class="row">
+  <div class="col-lg-4 col-sm-12">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">All</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Oriental</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Chinese Combos</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Chinese Starter</a>
+     <a class="list-group-item list-group-item-action" id="list-settings-list2" data-toggle="list" href="#list-settings2" role="tab" aria-controls="settings">Salads</a>
+	</div>
+  </div>
+  <div class="col-lg-8 col-sm-12">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" ng-repeat="category in categoryArr">
+		
+		<div class="col-md-12">
+			<h3 class="text-center">{{category}}</h3> 
+		</div>
+	  
+	  
+	  <div class="container">
+  <table class="table">
+    <thead>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in data" ng-if="category == x.category">
+        <td><button class="btn btn-sm" ng-class="x.vegflag=='veg' ? 'btn-success' : 'btn-danger'"></button></td>
+		<td><strong>{{x.name}}</strong>
+		<small>{{x.description}}</small></td>
+        <td><button class="btn btn-sm btn-light" ng-click="remove(x)"><i class="fa fa-minus" aria-hidden="true"></i></button></td>
+        <td>{{x.selectedNumbers}}</td>
+		<td><button class="btn btn-sm btn-light" ng-click="add(x)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+		<td><i class="fa fa-inr" aria-hidden="true"></i> {{x.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+	  
+	  </div>
+	  
+	  
+	  
+	      </div>
+  </div>
+</div>
+    </div>
+   
+    <div class="col col-lg-4">
+      <div class="card">
+  <div class="card-header">
+    Your Cart
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+	
+	
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	<table class="table">
+		<thead>
+		</thead>
+		<tbody>
+		<tr ng-repeat="item in cartArr">
+		<td>
+			{{item.name}}
+		</td>
+		<td> * </td>
+		<td>{{item.selectedNumbers}}</td>
+		<td><i class="fa fa-inr" aria-hidden="true"></i> {{item.price * item.selectedNumbers}}</td>
+		</tr>
+	</tbody>
+	</table>
+	
+	
+	
+	<hr>
+	<h4>Total:</h4>
+	<h4>{{cartValue}}</h4>
+    <button href="#" class="btn  btn-lg btn-block">Checkout</button>
+  </div>
+</div>
+    </div>
+  </div>
+
+</div>
+	  
+
+
+	  
+	  </div>
+	  
+	  <main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
